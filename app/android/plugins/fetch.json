@@ -1,0 +1,42 @@
+{
+    "cordova-plugin-file": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-file@3.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-file-transfer": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-file-transfer@1.4.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "org.apache.cordova.shell-exec": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-shell-exec@1.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-whitelist@1"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-networkinterface": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-networkinterface@1.0.8"
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}

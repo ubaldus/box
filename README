@@ -1,0 +1,20 @@
+ejaBox	Copyright (C) 2007-2016 by Ubaldo Porcheddu <ubaldo@eja.it>
+
+eja is a forking and extensible micro web server written in C and Lua that
+can serve static and dynamic generated pages.
+
+eja is also a standard Lua interpreter that can run scripts or work as an
+interactive shell.
+
+eja can also be used as a text scanner like AWK using Lua pattern matching
+syntax.
+
+Lua scripts can be compiled to eja machine portable bytecode.
+
+ejaBox is a minimal unix environment for eja based on busybox and designed
+with buildroot.
+
+ejaBox includes the ejaWebTelnet library to allow direct interaction with eja
+console from any browser.
+
+ejaBox is also an android app.
