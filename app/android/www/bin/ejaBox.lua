@@ -1,7 +1,5 @@
 -- Copyright (C) 2016 by Ubaldo Porcheddu <ubaldo@eja.it>
 
-eja.path='/data/user/0/it.eja.box/files/'
-eja.pathBin=eja.path..'/bin/'
 
 if not ejaFileStat(eja.pathBin..'ejaBox.sh') then
  ejaFileWrite(eja.pathBin..'ejaBox.sh',sf('#!%s/ash\nexport HOME=%s\nPATH=$HOME/bin:$PATH\nexport PS1="$ "\ncd $HOME\n$HOME/bin/busybox ash -i\n',eja.pathBin,eja.path))
@@ -14,7 +12,7 @@ ejaExecute('%s/busybox telnetd -l %s/ejaBox.sh -p 35223',eja.pathBin,eja.pathBin
 
 -- ejaWebTelnet
 
-dofile(eja.path..'/lib/ejaSocketProxy.lua')
+dofile(eja.pathLib..'ejaSocketProxy.lua')
 
 local sessionCount=5
 local localHost='0.0.0.0'
@@ -32,5 +30,4 @@ for i=0,sessionCount do
  end
 end
 
-eja.opt.webPath=eja.path..'/var/web/'
 ejaWebStart()

@@ -65,7 +65,7 @@ android: output
 	sed -i 's/+#define\t_PATH_BSHELL\t"\/bin\/sh"/+#define _PATH_BSHELL "\/system\/bin\/sh"/' target/android/package/uclibc/1.0.9/0001-PATH_BSHELL.patch
 	make android.update
 android.update:
-	cd target/android && yes "" | make config && make PREFIX="/data/data/it.box.eja/files/" && cp output/images/rootfs.tar ../../output/ejaBox.android.tar
+	cd target/android && yes "" | make config && make PREFIX="/data/data/it.eja.box/files/" && cp output/images/rootfs.tar ../../output/ejaBox.android.tar
 	make android.app
 android.app:
 	cd app/android && make && cp platforms/android/build/outputs/apk/android-debug.apk ../../output/ejaBox.android.apk
