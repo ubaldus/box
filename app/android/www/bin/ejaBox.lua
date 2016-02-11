@@ -2,9 +2,8 @@
 
 
 if not ejaFileStat(eja.pathBin..'ejaBox.sh') then
- ejaFileWrite(eja.pathBin..'ejaBox.sh',sf('#!%s/ash\nexport HOME=%s\nPATH=$HOME/bin:$PATH\nexport PS1="$ "\ncd $HOME\n$HOME/bin/busybox ash -i\n',eja.pathBin,eja.path))
+ ejaFileWrite(eja.pathBin..'ejaBox.sh',sf('#!%s/ash\nexport HOME=%s\nPATH=$HOME/bin:$PATH\nexport PS1="$ "\ncd $HOME; read -p "password: " -s pass; echo ""; if [ "$pass" = "eja.it" ]; then $HOME/bin/busybox ash -i; fi; exit;\n',eja.pathBin,eja.path))
  ejaUntar(eja.pathBin..'ejaBox.tar',eja.path)
- ejaExecute('%s/busybox --install -s %s',eja.pathBin,eja.pathBin)
  ejaExecute('chmod 755 %s/*',eja.pathBin)
 end
 
