@@ -16,7 +16,7 @@ function ejaWebTelnet(url, col, row) {
  if (typeof(url) !== 'undefined') { ejaWebTelnetUrl=url } else { ejaWebTelnetUrl=document.location.protocol+'//'+document.location.hostname+':'+document.location.search.slice(1)+'/?' }
  if (typeof(col) !== 'undefined') { ejaWebTelnetCol=col } else { ejaWebTelnetCol=parseInt((document.body.offsetWidth-5)/6.7) } 
  if (typeof(row) !== 'undefined') { ejaWebTelnetRow=row } else { ejaWebTelnetRow=parseInt((document.body.offsetHeight-5)/13) } 
- document.body.innerHTML=""
+ document.body.innerHTML='<div id="ejaKeyboard"></div><div id="ejaTerminal"></div>'
  Terminal.colors[256]='#ffffff'
  Terminal.colors[257]='#000000'
 
@@ -28,7 +28,7 @@ function ejaWebTelnet(url, col, row) {
   cursorBlink: true,
  });
 
- ejaWebTelnetTerm.open(document.body);
+ ejaWebTelnetTerm.open(document.getElementById("ejaWebTerminal"));
  ejaWebTelnetTerm.on('data', function(data) { 
   ejaWebTelnetBufferIn.push(data.charCodeAt(0)); 
   ejaWebTelnetLoopCount=ejaWebTelnetLoopTimeout;

@@ -4,9 +4,10 @@
  <meta charset="utf-8">
  <meta name="author" content="ubaldo@eja.it">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <script src="term.js"></script>
- <script src="ejaWebTelnet.js"></script> 
- <style>body{ font-size: 16px; }</style>
+ <script src="js/term.js"></script>
+ <script src="js/ejaWebTelnet.js"></script> 
+ <script src="js/ejaKeyboard.js"></script> 
+ <link rel="stylesheet" type="text/css" href="css/ejaKeyboard.css">
 </head>
 <body>
 <h1>eja Web Telnet</h1>
@@ -17,6 +18,13 @@
 <li><a href="/?35203">TTY4</a>
 <li><a href="/?35204">TTY5</a>
 </ul>
-<script>if (document.location.search.slice(1) > 0) { ejaWebTelnet(); }</script>
+<script>
+if (document.location.search.slice(1) > 0) { 
+ ejaWebTelnet(); 
+ if ('ontouchstart' in document.documentElement) {
+  ejaKeyboard(0); 
+ }
+}
+</script>
 </body>
 </html>
