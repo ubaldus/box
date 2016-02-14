@@ -26,16 +26,16 @@ public boolean execute(String action, JSONArray args, CallbackContext callbackCo
                         BufferedReader reader = new BufferedReader(
                                 new InputStreamReader(p.getInputStream()));
                         String line = "";
-                        while ((line = reader.readLine()) != null) {
-                                output.append(line + "\n");
-                                p.waitFor();
-                        }
+//                        while ((line = reader.readLine()) != null) {
+//                                output.append(line + "\n");
+//                                p.waitFor();
+//                        }
                         exitStatus = p.exitValue();
                 }
                 catch (IOException e) {
                         e.printStackTrace();
-                } catch (InterruptedException e) {
-                        e.printStackTrace();
+//                } catch (InterruptedException e) {
+//                        e.printStackTrace();
                 }
 
                 JSONObject json = new JSONObject();
