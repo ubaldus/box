@@ -8,6 +8,7 @@ eja.opt.logLevel=4;
 eja.url=''
 eja.editor={}
 
+
 document.addEventListener("deviceready", ejaInit, false);
 
 
@@ -33,18 +34,10 @@ function ejaExecute(cmd) {
 }
 
 
-function ejaBrowserOpen() {
- if (! eja.browser) {
-  eja.browser=1;
-  navigator.app.loadUrl("http://127.0.0.1:35248/", { wait: 5000 })
- } 
-}
-
-
 function ejaInit() {
  ejaInfo("System init")
- document.getElementById('cmdTelnetBrowser').addEventListener('touchstart', ejaTelnetBrowser, false); 
  document.getElementById('cmdTelnet').addEventListener('touchstart', ejaTelnet, false); 
+ document.getElementById('cmdConsole').addEventListener('touchstart', ejaConsole, false); 
  document.getElementById('cmdEditor').addEventListener('touchstart', ejaEditor, false); 
  document.getElementById('cmdEditorSave').addEventListener('touchstart', ejaEditorSave, false); 
  document.getElementById('cmdExit').addEventListener('touchstart', ejaExit, false); 
@@ -68,29 +61,22 @@ function ejaStart() {
 }
 
 
-function ejaTelnetBrowser() {
- document.getElementById("cmdTelnetBrowser").style.display="none";
- ejaInfo("Opening browser")
- ejaBrowserOpen()
- ejaTelnet()
+function ejaConsole() {
+ ejaDebug("Console")
+ cordova.exec(function(){}, function(){}, "InAppBrowser", "open", ['http://127.0.0.1:35248/', '_blank', 'location=no,hardwareback=yes,zoom=no']);
 }
 
 
 function ejaTelnet() {
- document.getElementById("cmdTelnetBrowser").style.display="none";
  document.getElementById("cmdTelnet").style.display="none";
  document.getElementById("cmdEditor").style.display="none";
+ document.getElementById("cmdConsole").style.display="inline";
  ejaInfo("Starting server")
  networkinterface.getIPAddress(function (ip) { 
   ejaInfo('Network access:\n    http://'+ip+':35248\n    telnet://'+ip+':35223'); 
  });
- window.setTimeout(function() {
-  ejaInfo("Server ready")
-  window.setTimeout(function() {
-   ejaExecute(eja.pathBin+"/eja "+eja.pathBin+"/ejaBox.lua")                
-   ejaError("Server crashed")  
-  },500);
- },2500);
+ ejaExecute(eja.pathBin+"/eja "+eja.pathBin+"/ejaBox.lua")                
+ ejaInfo("Server ready")
 }
 
 
@@ -110,7 +96,6 @@ function ejaFileCopy(fileIn, fileOut) {
 }
 
 function ejaEditor() {
- document.getElementById("cmdTelnetBrowser").style.display="none";
  document.getElementById("cmdTelnet").style.display="none";
  document.getElementById("cmdEditor").style.display="none";
  document.getElementById("cmdEditorSave").style.display="inline";
