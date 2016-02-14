@@ -6,6 +6,7 @@ var ejaKeyboardMode=0
 function ejaKeyboardClick(o) {
  if (o.name == "kbd") {
   ejaKeyboard(1)
+  return;
  }
  if (o.name == "uArr;") {
   if (ejaKeyboardMode==2) {
@@ -41,7 +42,7 @@ function ejaKeyboardHtml(value) {
 function ejaKeyboard(mode) {
  ejaKeyboardMode=mode
  var kb=[]
- kb[0]=["kbd"]
+ kb[0]=[["kbd"]]
  kb[1]=[
   ["`","1","2","3","4","5","6","7","8","9","0","-","=","&lArr;"],
   ["&rArr;","q","w","e","r","t","y","u","i","o","p","[","]","&uarr;"],

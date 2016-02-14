@@ -36,7 +36,6 @@ function ejaExecute(cmd) {
 function ejaBrowserOpen() {
  if (! eja.browser) {
   eja.browser=1;
-//  navigator.app.loadUrl("http://127.0.0.1:35248/", { wait: 5000, openExternal: true, clearHistory: true });
   navigator.app.loadUrl("http://127.0.0.1:35248/", { wait: 5000 })
  } 
 }
@@ -73,7 +72,7 @@ function ejaTelnetBrowser() {
  document.getElementById("cmdTelnetBrowser").style.display="none";
  ejaInfo("Opening browser")
  ejaBrowserOpen()
- ejaTelnet() 
+ ejaTelnet()
 }
 
 
@@ -86,7 +85,6 @@ function ejaTelnet() {
   ejaInfo('Network access:\n    http://'+ip+':35248\n    telnet://'+ip+':35223'); 
  });
  window.setTimeout(function() {
-//  document.getElementById("cmd").style.display="none";
   ejaInfo("Server ready")
   window.setTimeout(function() {
    ejaExecute(eja.pathBin+"/eja "+eja.pathBin+"/ejaBox.lua")                
