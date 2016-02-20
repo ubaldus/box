@@ -7,9 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "org.apache.cordova.shell-exec": {
-            "PACKAGE_NAME": "it.eja.box"
-        },
         "cordova-plugin-file": {
             "PACKAGE_NAME": "it.eja.box"
         },
@@ -23,6 +20,9 @@
             "PACKAGE_NAME": "it.eja.box"
         },
         "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "it.eja.box"
+        },
+        "org.apache.cordova.shell-exec": {
             "PACKAGE_NAME": "it.eja.box"
         }
     },

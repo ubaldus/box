@@ -33,32 +33,40 @@ function ejaKeyboardClick(o) {
   document.getElementById('ejaKeyboard').style.display="none"
   return;
  }
+ var a=[]
  var c=o.value.charCodeAt(0)
- if (o.name == 'crarr;')	{ c=13;	} 
- if (o.name == 'rArr;')		{ c=9;	} 
- if (o.name == 'lArr;')		{ c=8;	} 
- if (o.name == 'uArr;')		{ c=0; 	} 
- if (o.name == 'ctrl')		{ c=17;	} 
- if (o.name == 'alt')		{ c=18;	} 
- if (o.name == 'uarr;')		{ c=38;	} 
- if (o.name == 'darr;')		{ c=40;	} 
- if (o.name == 'larr;')		{ c=37;	} 
- if (o.name == 'rarr;')		{ c=39;	} 
- if (o.name == 'quot;')		{ c=34;	} 
- if (o.name == 'esc')		{ c=27;	} 
- if (o.name == 'home')		{ c=36;	} 
- if (o.name == 'end')		{ c=35;	} 
- if (o.name == 'up')		{ c=33;	} 
- if (o.name == 'down')		{ c=34;	} 
  if (c > 0) {
-  ejaWebTelnetBufferIn.push(c);
-  console.log(c)
+  a[0]=c
+  if (o.name == 'crarr;')	{ a[0]=13;		} 
+  if (o.name == 'rArr;')	{ a[0]=9;		} 
+  if (o.name == 'lArr;')	{ a[0]=8;		} 
+  if (o.name == 'uArr;')	{ a[0]=0; 		} 
+  if (o.name == 'ctrl')		{ a[0]=17;		} 
+  if (o.name == 'alt')		{ a[0]=18;		} 
+  if (o.name == 'uarr;')	{ a=[27,91,65];		} 
+  if (o.name == 'darr;')	{ a=[27,91,66];		} 
+  if (o.name == 'larr;')	{ a=[27,91,68];		} 
+  if (o.name == 'rarr;')	{ a=[27,91,67];		} 
+  if (o.name == 'quot;')	{ a[0]=34;		} 
+  if (o.name == 'esc')		{ a[0]=27;		} 
+  if (o.name == 'home')		{ a=[27,48,72];		} 
+  if (o.name == 'end')		{ a=[27,48,70];		} 
+  if (o.name == 'up')		{ a=[27,91,53,126];	} 
+  if (o.name == 'down')		{ a=[27,91,54,126];	} 
+  for (i in a) {
+   ejaWebTelnetBufferIn.push(a[i]);
+   console.log(a[i])
+  }
  }
 }
 
 
 function ejaKeyboardHtml(value) {
- return '<input type="button" name="'+value.replace("&","")+'" value="'+value+'" onclick="ejaKeyboardClick(this)">';
+ var style=""
+ var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || document.body.offsetHeight;
+ if (h > 600) { style+="height: 50px;"; }
+
+ return '<input type="button" name="'+value.replace("&","")+'" value="'+value+'" onclick="ejaKeyboardClick(this)" style="'+style+'">';
 }
 
 
