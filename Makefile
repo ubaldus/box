@@ -90,12 +90,54 @@ android.clean:
 	-rm output/ejaBox.android.*
 	-rm output/eja.android
 	
+	
+rpi: 	output
+	tar xf bkp/$(ejaBuildRootTar) -C target && mv target/buildroot* target/rpi
+	cd target/rpi && patch -p1 < ../../bkp/ejaBuildRoot.patch
+	echo "BR2_arm=y" >>  target/rpi/.config
+	echo "BR2_cortex_a7=y" >>  target/rpi/.config
+	echo "BR2_ARM_EABIHF=y" >>  target/rpi/.config
+	echo "BR2_ARM_FPU_NEON_VFPV4=y" >>  target/rpi/.config
+	echo "BR2_TOOLCHAIN_BUILDROOT_CXX=y" >>  target/rpi/.config
+	echo "BR2_TARGET_GENERIC_GETTY_PORT=\"tty1\"" >>  target/rpi/.config
+	echo "BR2_KERNEL_HEADERS_VERSION=y" >>  target/rpi/.config
+	echo "BR2_DEFAULT_KERNEL_VERSION=\"4.1.5\"" >>  target/rpi/.config
+	echo "BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_4_1=y" >>  target/rpi/.config
+	echo "BR2_LINUX_KERNEL=y" >>  target/rpi/.config
+	echo "BR2_LINUX_KERNEL_CUSTOM_GIT=y" >>  target/rpi/.config
+	echo "BR2_LINUX_KERNEL_CUSTOM_REPO_URL=\"https://github.com/raspberrypi/linux.git\"" >>  target/rpi/.config
+	echo "BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION=\"592503752b6951972f161f04280683c5af38d173\"" >>  target/rpi/.config
+	echo "BR2_LINUX_KERNEL_DEFCONFIG=\"bcm2709\"" >>  target/rpi/.config
+	echo "BR2_LINUX_KERNEL_ZIMAGE=y" >>  target/rpi/.config
+	echo "BR2_LINUX_KERNEL_DTS_SUPPORT=y" >>  target/rpi/.config
+	echo "BR2_LINUX_KERNEL_INTREE_DTS_NAME=\"bcm2709-rpi-2-b\"" >>  target/rpi/.config
+	echo "BR2_PACKAGE_RPI_FIRMWARE=y" >>  target/rpi/.config
+	echo "BR2_TARGET_ROOTFS_CPIO=y" >> target/rpi/.config  
+	echo "BR2_TARGET_ROOTFS_CPIO_NONE=y" >> target/rpi/.config  
+	echo "BR2_TARGET_ROOTFS_INITRAMFS=y" >> target/rpi/.config  
+	make rpi.update
+rpi.update:
+#	cd target/rpi && yes "" | make config && make PREFIX="/" 
+	cp target/rpi/output/target/bin/eja	output/eja.rpi
+	- rm -rf output/ejaBox.rpi
+	mkdir output/ejaBox.rpi 
+	-cp target/rpi/output/images/bcm2709-rpi-2-b.dtb target/rpi/output/images/zImage target/rpi/output/images/rpi-firmware/* output/ejaBox.rpi
+	target/rpi/output/host/usr/bin/mkknlimg target/rpi/output/images/zImage output/ejaBox.rpi/zImage
+	cd output/ejaBox.rpi && tar cRv * > ../ejaBox.rpi.tar
+	rm -rf output/ejaBox.rpi
+rpi.clean: 
+	-rm -rf target/rpi
+	-rm output/ejaBox.rpi.* output/eja.rpi
 
-all: arm mips i32 i64 android
 
-update: arm.update mips.update i32.update i64.update android.update
+	
+	
 
-clean: arm.clean mips.clean i32.clean i64.clean android.clean
+all: arm mips i32 i64 android rpi
+
+update: arm.update mips.update i32.update i64.update android.update rpi.update
+
+clean: arm.clean mips.clean i32.clean i64.clean android.clean rpi.clean
 	-rmdir target
 	-rmdir output
 
