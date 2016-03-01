@@ -12,6 +12,7 @@ target:	bkp/$(ejaBuildRootTar)
 output:	target
 	-mkdir output
 
+
 arm: 	output
 	tar xf bkp/$(ejaBuildRootTar) -C target && mv target/buildroot* target/arm
 	cd target/arm && patch -p1 < ../../bkp/ejaBuildRoot.patch
@@ -117,7 +118,7 @@ rpi: 	output
 	echo "BR2_TARGET_ROOTFS_INITRAMFS=y" >> target/rpi/.config  
 	make rpi.update
 rpi.update:
-#	cd target/rpi && yes "" | make config && make PREFIX="/" 
+	cd target/rpi && yes "" | make config && make PREFIX="/" 
 	cp target/rpi/output/target/bin/eja	output/eja.rpi
 	- rm -rf output/ejaBox.rpi
 	mkdir output/ejaBox.rpi 
