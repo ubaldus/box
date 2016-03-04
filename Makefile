@@ -134,7 +134,7 @@ rpi.clean:
 	
 	
 
-all: arm mips i32 i64 android rpi
+all: arm mips i32 i64 rpi android
 
 update: arm.update mips.update i32.update i64.update android.update rpi.update
 
