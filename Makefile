@@ -5,17 +5,18 @@
 
 ejaBuildRootTar=buildroot-2016.02.tar.gz
 
-bkp/$(ejaBuildRootTar):
-	wget -qO bkp/$(ejaBuildRootTar) https://buildroot.org/downloads/$(ejaBuildRootTar)
-target:	bkp/$(ejaBuildRootTar)
+dl/$(ejaBuildRootTar):
+	mkdir dl
+	wget -qO dl/$(ejaBuildRootTar) https://buildroot.org/downloads/$(ejaBuildRootTar)
+target:	dl/$(ejaBuildRootTar)
 	-mkdir target
 output:	target
 	-mkdir output
 
 
 arm: 	output
-	tar xf bkp/$(ejaBuildRootTar) -C target && mv target/buildroot* target/arm
-	cd target/arm && patch -p1 < ../../bkp/ejaBuildRoot.patch
+	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/arm
+	cd target/arm && patch -p1 < ../../patch/ejaBuildRoot.patch && ln -s ../../dl .
 	echo "BR2_arm=y" >> target/arm/.config	
 	make arm.update
 arm.update:
@@ -28,8 +29,8 @@ arm.clean:
 
 
 mips: 	output
-	tar xf bkp/$(ejaBuildRootTar) -C target && mv target/buildroot* target/mips
-	cd target/mips && patch -p1 < ../../bkp/ejaBuildRoot.patch
+	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/mips
+	cd target/mips && patch -p1 < ../../patch/ejaBuildRoot.patch && ln -s ../../dl .
 	echo "BR2_mips=y" >> target/mips/.config
 	make mips.update
 mips.update:
@@ -43,8 +44,8 @@ mips.clean:
 	
 
 i32:	output
-	tar xf bkp/$(ejaBuildRootTar) -C target && mv target/buildroot* target/i32
-	cd target/i32 && patch -p1 < ../../bkp/ejaBuildRoot.patch
+	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/i32
+	cd target/i32 && patch -p1 < ../../patch/ejaBuildRoot.patch && ln -s ../../dl .
 	echo "BR2_i386=y" >> target/i32/.config	
 	make i32.update
 i32.update:
@@ -58,8 +59,8 @@ i32.clean:
 	
 	
 i64:	output
-	tar xf bkp/$(ejaBuildRootTar) -C target && mv target/buildroot* target/i64
-	cd target/i64 && patch -p1 < ../../bkp/ejaBuildRoot.patch
+	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/i64
+	cd target/i64 && patch -p1 < ../../patch/ejaBuildRoot.patch && ln -s ../../dl .
 	echo "BR2_x86_64=y" >> target/i64/.config	
 	make i64.update
 i64.update:
@@ -73,8 +74,8 @@ i64.clean:
 	
 	
 android: output
-	tar xf bkp/$(ejaBuildRootTar) -C target && mv target/buildroot* target/android
-	cd target/android && patch -p1 < ../../bkp/ejaBuildRoot.patch
+	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/android
+	cd target/android && patch -p1 < ../../patch/ejaBuildRoot.patch && ln -s ../../dl .
 	echo "BR2_arm=y" >> target/android/.config
 	sed -i 's/+#define\t_PATH_BSHELL\t"\/bin\/sh"/+#define _PATH_BSHELL "\/system\/bin\/sh"/' target/android/package/uclibc/1.0.9/0001-PATH_BSHELL.patch
 	make android.update
@@ -93,8 +94,8 @@ android.clean:
 	
 	
 rpi: 	output
-	tar xf bkp/$(ejaBuildRootTar) -C target && mv target/buildroot* target/rpi
-	cd target/rpi && patch -p1 < ../../bkp/ejaBuildRoot.patch
+	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/rpi
+	cd target/rpi && patch -p1 < ../../patch/ejaBuildRoot.patch && ln -s ../../dl .
 	echo "BR2_arm=y" >>  target/rpi/.config
 	echo "BR2_cortex_a7=y" >>  target/rpi/.config
 	echo "BR2_ARM_EABIHF=y" >>  target/rpi/.config
