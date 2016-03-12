@@ -12,4 +12,4 @@ ejaBox is a minimal unix environment for eja based on BusyBox and designed with 
 
 ejaBox includes the ejaWebTelnet library to allow direct interaction with eja console from any browser.
 
-ejaBox is also an android app and a Raspberry Pi image.
+ejaBox is also an Android app and a Raspberry Pi image.
