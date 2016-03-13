@@ -77,7 +77,7 @@ android: output
 	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/android
 	cd target/android && patch -p1 < ../../patch/ejaBuildRoot.patch && ln -s ../../dl .
 	echo "BR2_arm=y" >> target/android/.config
-	sed -i 's/+#define\t_PATH_BSHELL\t"\/bin\/sh"/+#define _PATH_BSHELL "\/system\/bin\/sh"/' target/android/package/uclibc/1.0.9/0001-PATH_BSHELL.patch
+	sed -i 's/+#define\t_PATH_BSHELL\t"\/bin\/sh"/+#define _PATH_BSHELL "\/system\/bin\/sh"/' target/android/package/uclibc/1.0.12/0001-PATH_BSHELL.patch
 	make android.update
 android.update:
 	cd target/android && yes "" | make config && make PREFIX="/data/data/it.eja.box/files/"
