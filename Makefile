@@ -7,7 +7,7 @@ ejaBuildRootTar=buildroot-2016.02.tar.gz
 
 dl:
 	mkdir dl
-dl/$(ejaBuildRootTar):
+dl/$(ejaBuildRootTar): dl
 	wget -qO dl/$(ejaBuildRootTar) https://buildroot.org/downloads/$(ejaBuildRootTar)
 target:	dl/$(ejaBuildRootTar)
 	-mkdir target
