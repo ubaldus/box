@@ -27,8 +27,8 @@ diff -Naur buildroot-2015.11.1.orig/.config buildroot-2015.11.1.new/.config
 +BR2_TARGET_GENERIC_ROOT_PASSWD="eja.it"
 +BR2_SYSTEM_BIN_SH_BUSYBOX=y
 +BR2_SYSTEM_BIN_SH="busybox"
-+BR2_PACKAGE_EJA=y
 +BR2_ROOTFS_OVERLAY="../../rootfs"
++BR2_PACKAGE_EJA=y
 diff -Naur buildroot-2015.11.1.orig/package/eja/busybox.config buildroot-2015.11.1.new/package/eja/busybox.config
 --- buildroot-2015.11.1.orig/package/eja/busybox.config	1970-01-01 00:00:00.000000000 +0000
 +++ buildroot-2015.11.1.new/package/eja/busybox.config	2016-01-12 11:29:04.811469134 +0000
