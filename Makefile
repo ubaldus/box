@@ -145,11 +145,11 @@ rpi2: 	output
 	echo "BR2_LINUX_KERNEL=y" >>  target/rpi2/.config
 	echo "BR2_LINUX_KERNEL_CUSTOM_GIT=y" >>  target/rpi2/.config
 	echo "BR2_LINUX_KERNEL_CUSTOM_REPO_URL=\"https://github.com/raspberrypi/linux.git\"" >>  target/rpi2/.config
-	echo "BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION=\"592503752b6951972f161f04280683c5af38d173\"" >>  target/rpi2/.config
+	echo "BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION=\"ac91ee97a7dfa0c7ace891271f62ce6c70c85c45\"" >>  target/rpi2/.config
 	echo "BR2_LINUX_KERNEL_DEFCONFIG=\"bcm2709\"" >>  target/rpi2/.config
 	echo "BR2_LINUX_KERNEL_ZIMAGE=y" >>  target/rpi2/.config
 	echo "BR2_LINUX_KERNEL_DTS_SUPPORT=y" >>  target/rpi2/.config
-	echo "BR2_LINUX_KERNEL_INTREE_DTS_NAME=\"bcm2709-rpi-2-b\"" >>  target/rpi2/.config
+	echo "BR2_LINUX_KERNEL_INTREE_DTS_NAME=\"bcm2709-rpi-2-b bcm2710-rpi-3-b\"" >>  target/rpi2/.config
 	echo "BR2_PACKAGE_RPI_FIRMWARE=y" >>  target/rpi2/.config
 	echo "BR2_TARGET_ROOTFS_CPIO=y" >> target/rpi2/.config  
 	echo "BR2_TARGET_ROOTFS_CPIO_NONE=y" >> target/rpi2/.config  
