@@ -145,7 +145,7 @@ rpi2: 	output
 	echo "BR2_LINUX_KERNEL=y" >>  target/rpi2/.config
 	echo "BR2_LINUX_KERNEL_CUSTOM_GIT=y" >>  target/rpi2/.config
 	echo "BR2_LINUX_KERNEL_CUSTOM_REPO_URL=\"https://github.com/raspberrypi/linux.git\"" >>  target/rpi2/.config
-	echo "BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION=\"ac91ee97a7dfa0c7ace891271f62ce6c70c85c45\"" >>  target/rpi2/.config
+	echo "BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION=\"20fe468af4bb40fec0f81753da4b20a8bfc259c9\"" >>  target/rpi2/.config
 	echo "BR2_LINUX_KERNEL_DEFCONFIG=\"bcm2709\"" >>  target/rpi2/.config
 	echo "BR2_LINUX_KERNEL_ZIMAGE=y" >>  target/rpi2/.config
 	echo "BR2_LINUX_KERNEL_DTS_SUPPORT=y" >>  target/rpi2/.config
