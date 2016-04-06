@@ -22,8 +22,8 @@ arm: 	output
 	make arm.update
 arm.update:
 	cd target/arm && yes "" | make config && make PREFIX="/" 
-	cp target/arm/output/images/rootfs.tar	output/ejaBox.arm.tar
-	cp target/arm/output/target/bin/eja	output/eja.arm
+	cp target/arm/output/images/rootfs.tar output/ejaBox.arm.tar
+	cp target/arm/output/target/usr/bin/eja output/eja.arm
 arm.clean: 
 	-rm -rf target/arm
 	-rm output/ejaBox.arm.* output/eja.arm
@@ -36,8 +36,8 @@ mips: 	output
 	make mips.update
 mips.update:
 	cd target/mips && yes "" | make config && make PREFIX="/" 
-	cp target/mips/output/images/rootfs.tar	output/ejaBox.mips.tar
-	cp target/mips/output/target/bin/eja	output/eja.mips
+	cp target/mips/output/images/rootfs.tar output/ejaBox.mips.tar
+	cp target/mips/output/target/usr/bin/eja output/eja.mips
 
 mips.clean: 
 	-rm -rf target/mips
@@ -51,8 +51,8 @@ i32:	output
 	make i32.update
 i32.update:
 	cd target/i32 && yes "" | make config && make PREFIX="/"
-	cp target/i32/output/images/rootfs.tar	output/ejaBox.i32.tar
-	cp target/i32/output/target/bin/eja	output/eja.i32
+	cp target/i32/output/images/rootfs.tar output/ejaBox.i32.tar
+	cp target/i32/output/target/usr/bin/eja output/eja.i32
 	
 i32.clean: 
 	-rm -rf target/i32
@@ -66,8 +66,8 @@ i64:	output
 	make i64.update
 i64.update:
 	cd target/i64 && yes "" | make config && make PREFIX="/"
-	cp target/i64/output/images/rootfs.tar	output/ejaBox.i64.tar
-	cp target/i64/output/target/bin/eja	output/eja.i64
+	cp target/i64/output/images/rootfs.tar output/ejaBox.i64.tar
+	cp target/i64/output/target/usr/bin/eja output/eja.i64
 	
 i64.clean: 
 	-rm -rf target/i64 
@@ -82,8 +82,8 @@ android: output
 	make android.update
 android.update:
 	cd target/android && yes "" | make config && make PREFIX="/data/data/it.eja.box/files/"
-	cp target/android/output/images/rootfs.tar	output/ejaBox.android.tar
-	cp target/android/output/target/bin/eja		output/eja.android
+	cp target/android/output/images/rootfs.tar output/ejaBox.android.tar
+	cp target/android/output/target/usr/bin/eja output/eja.android
 	make android.app
 android.app:
 	cd app/android && make && cp platforms/android/build/outputs/apk/android-release-unsigned.apk ../../output/ejaBox.android.apk
@@ -118,7 +118,7 @@ rpi1: 	output
 	make rpi1.update
 rpi1.update:
 	cd target/rpi1 && yes "" | make config && make PREFIX="/" 
-	cp target/rpi1/output/target/bin/eja	output/eja.rpi1
+	cp target/rpi1/output/target/usr/bin/eja output/eja.rpi1
 	- rm -rf output/ejaBox.rpi1
 	mkdir output/ejaBox.rpi1 
 	-cp target/rpi1/output/images/*.dtb target/rpi1/output/images/zImage target/rpi1/output/images/rpi-firmware/* output/ejaBox.rpi1
@@ -157,7 +157,7 @@ rpi2: 	output
 	make rpi2.update
 rpi2.update:
 	cd target/rpi2 && yes "" | make config && make PREFIX="/" 
-	cp target/rpi2/output/target/bin/eja	output/eja.rpi2
+	cp target/rpi2/output/target/usr/bin/eja output/eja.rpi2
 	- rm -rf output/ejaBox.rpi2
 	mkdir output/ejaBox.rpi2 
 	-cp target/rpi2/output/images/*.dtb target/rpi2/output/images/zImage target/rpi2/output/images/rpi-firmware/* output/ejaBox.rpi2
