@@ -419,7 +419,7 @@ diff -Naur buildroot-2015.11.1.orig/package/eja/busybox.config buildroot-2015.11
 +# CONFIG_USE_BB_PWD_GRP is not set
 +# CONFIG_USE_BB_SHADOW is not set
 +CONFIG_USE_BB_CRYPT=y
-+# CONFIG_USE_BB_CRYPT_SHA is not set
++CONFIG_USE_BB_CRYPT_SHA=y
 +CONFIG_ADDUSER=y
 +# CONFIG_FEATURE_ADDUSER_LONG_OPTIONS is not set
 +# CONFIG_FEATURE_CHECK_NAMES is not set
@@ -440,7 +440,7 @@ diff -Naur buildroot-2015.11.1.orig/package/eja/busybox.config buildroot-2015.11
 +CONFIG_FEATURE_SECURETTY=y
 +CONFIG_PASSWD=y
 +CONFIG_FEATURE_PASSWD_WEAK_CHECK=y
-+# CONFIG_CRYPTPW is not set
++CONFIG_CRYPTPW=y
 +# CONFIG_CHPASSWD is not set
 +CONFIG_FEATURE_DEFAULT_PASSWD_ALGO="des"
 +CONFIG_SU=y
