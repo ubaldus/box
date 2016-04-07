@@ -972,7 +972,7 @@ diff -Naur buildroot-2015.11.1.orig/package/eja/eja.mk buildroot-2015.11.1.new/p
 +endef
 +
 +define EJA_INSTALL_TARGET_CMDS
-+        $(INSTALL) -D -m 0755 $(@D)/eja $(TARGET_DIR)/bin/
++        $(INSTALL) -D -m 0755 $(@D)/eja $(TARGET_DIR)/usr/bin/
 +endef
 +
 +$(eval $(generic-package))
