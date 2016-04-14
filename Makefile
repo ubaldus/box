@@ -6,74 +6,93 @@
 ejaBuildRootTar=buildroot-2016.02.tar.gz
 
 
+all: arm mips i386 x86_64 rpi1 rpi2 android
+
+update: arm.update mips.update i386.update x86_64.update rpi1.update rpi2.update android.update
+
+clean: arm.clean mips.clean i386.clean x86_64.clean rpi1.clean rpi2.clean android.clean
+	-rmdir target
+	-rmdir output
+	
 dl:
 	mkdir dl
 	wget -O dl/$(ejaBuildRootTar) https://buildroot.org/downloads/$(ejaBuildRootTar)
+	
 target: dl
 	-mkdir target
+	
 output: target
 	-mkdir output
-                                
+	
+generic.prepare: output
+	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/${arch}
+	cd target/${arch} && ln -s ../../dl . && cat ../../patch/*.patch | patch -p1
+	echo "BR2_${arch}=y" >> target/${arch}/.config	
+	
+generic.config.auto:
+	cd target/${arch} && yes "" | make config
+	
+generic.config.menu:
+	cd target/${arch} && make menuconfig
+	
+generic.update:
+	cd target/${arch} && make PREFIX="/"
+	cp target/${arch}/output/images/rootfs.tar output/ejaBox.${arch}.tar
+	cp target/${arch}/output/target/usr/bin/eja output/eja.${arch}
+	
+generic.clean: 
+	@-rm -rf target/${arch}
+	@-rm output/ejaBox.${arch}.* output/eja.${arch}
 
-arm: 	output
-	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/arm
-	cd target/arm && ln -s ../../dl . && cat ../../patch/*.patch | patch -p1
-	echo "BR2_arm=y" >> target/arm/.config	
-	make arm.update
-arm.update:
-	cd target/arm && yes "" | make config && make PREFIX="/" 
-	cp target/arm/output/images/rootfs.tar output/ejaBox.arm.tar
-	cp target/arm/output/target/usr/bin/eja output/eja.arm
-arm.clean: 
-	-rm -rf target/arm
-	-rm output/ejaBox.arm.* output/eja.arm
+
+arm:
+	make generic.prepare     arch=arm
+	make generic.config.auto arch=arm
+	make generic.update      arch=arm
+arm.config:
+	make generic.prepare     arch=arm
+	make generic.config.menu arch=arm
+	make generic.update      arch=arm
+arm.clean:
+	make generic.clean       arch=arm
 
 
-mips: 	output
-	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/mips
-	cd target/mips && ln -s ../../dl . && cat ../../patch/*.patch | patch -p1
-	echo "BR2_mips=y" >> target/mips/.config
-	make mips.update
-mips.update:
-	cd target/mips && yes "" | make config && make PREFIX="/" 
-	cp target/mips/output/images/rootfs.tar output/ejaBox.mips.tar
-	cp target/mips/output/target/usr/bin/eja output/eja.mips
+mips:
+	make generic.prepare     arch=mips
+	make generic.config.auto arch=mips
+	make generic.update      arch=mips
+mips.config:
+	make generic.prepare     arch=mips
+	make generic.config.menu arch=mips
+	make generic.update      arch=mips
+mips.clean:
+	make generic.clean       arch=mips
 
-mips.clean: 
-	-rm -rf target/mips
-	-rm output/ejaBox.mips.* output/eja.mips
-	
 
-i32:	output
-	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/i32
-	cd target/i32 && ln -s ../../dl . && cat ../../patch/*.patch | patch -p1
-	echo "BR2_i386=y" >> target/i32/.config	
-	make i32.update
-i32.update:
-	cd target/i32 && yes "" | make config && make PREFIX="/"
-	cp target/i32/output/images/rootfs.tar output/ejaBox.i32.tar
-	cp target/i32/output/target/usr/bin/eja output/eja.i32
-	
-i32.clean: 
-	-rm -rf target/i32
-	-rm output/ejaBox.i32.* output/eja.i32
-	
-	
-i64:	output
-	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/i64
-	cd target/i64 && ln -s ../../dl . && cat ../../patch/*.patch | patch -p1
-	echo "BR2_x86_64=y" >> target/i64/.config	
-	make i64.update
-i64.update:
-	cd target/i64 && yes "" | make config && make PREFIX="/"
-	cp target/i64/output/images/rootfs.tar output/ejaBox.i64.tar
-	cp target/i64/output/target/usr/bin/eja output/eja.i64
-	
-i64.clean: 
-	-rm -rf target/i64 
-	-rm output/ejaBox.i64.* output/eja.i64
-	
-	
+i386:
+	make generic.prepare     arch=i386
+	make generic.config.auto arch=i386
+	make generic.update      arch=i386
+i386.config:
+	make generic.prepare     arch=i386
+	make generic.config.menu arch=i386
+	make generic.update      arch=i386
+i386.clean:
+	make generic.clean       arch=i386
+
+
+x86_64:
+	make generic.prepare     arch=x86_64
+	make generic.config.auto arch=x86_64
+	make generic.update      arch=x86_64
+x86_64.config:
+	make generic.prepare     arch=x86_64
+	make generic.config.menu arch=x86_64
+	make generic.update      arch=x86_64
+x86_64.clean:
+	make generic.clean       arch=x86_64
+
+
 android: output
 	tar xf dl/$(ejaBuildRootTar) -C target && mv target/buildroot* target/android
 	cd target/android && ln -s ../../dl . && cat ../../patch/*.patch | patch -p1
@@ -168,14 +187,4 @@ rpi2.clean:
 	-rm -rf target/rpi2
 	-rm output/ejaBox.rpi2.* output/eja.rpi2
 
-
-	
-
-all: arm mips i32 i64 rpi1 rpi2 android
-
-update: arm.update mips.update i32.update i64.update android.update rpi1.update rpi2.update
-
-clean: arm.clean mips.clean i32.clean i64.clean android.clean rpi1.clean rpi2.clean
-	-rmdir target
-	-rmdir output
 
