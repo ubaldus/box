@@ -963,8 +963,8 @@ diff -Naur buildroot-2015.11.1.orig/package/eja/eja.mk buildroot-2015.11.1.new/p
 --- buildroot-2015.11.1.orig/package/eja/eja.mk	1970-01-01 00:00:00.000000000 +0000
 +++ buildroot-2015.11.1.new/package/eja/eja.mk	2016-01-12 11:29:04.811469134 +0000
 @@ -0,0 +1,14 @@
-+EJA_VERSION:= 9.4
-+EJA_SOURCE:= v$(EJA_VERSION).tar.gz
++EJA_VERSION:= 9.4.22
++EJA_SOURCE:= $(EJA_VERSION).tar.gz
 +EJA_SITE:= https://github.com/ubaldus/eja/archive
 +EJA_INSTALL_TARGET:=YES
 +
