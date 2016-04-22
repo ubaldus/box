@@ -48,10 +48,12 @@ generic.clean:
 arm:
 	make generic.prepare     arch=arm
 	make generic.config.auto arch=arm
-	make generic.update      arch=arm
+	make arm.update
 arm.config:
 	make generic.prepare     arch=arm
 	make generic.config.menu arch=arm
+	make arm.update
+arm.update:
 	make generic.update      arch=arm
 arm.clean:
 	make generic.clean       arch=arm
@@ -60,10 +62,11 @@ arm.clean:
 mips:
 	make generic.prepare     arch=mips
 	make generic.config.auto arch=mips
-	make generic.update      arch=mips
+	make mips.update
 mips.config:
 	make generic.prepare     arch=mips
-	make generic.config.menu arch=mips
+	make mips.update
+mips.update:
 	make generic.update      arch=mips
 mips.clean:
 	make generic.clean       arch=mips
@@ -72,10 +75,11 @@ mips.clean:
 i386:
 	make generic.prepare     arch=i386
 	make generic.config.auto arch=i386
-	make generic.update      arch=i386
+	make i386.update
 i386.config:
 	make generic.prepare     arch=i386
-	make generic.config.menu arch=i386
+	make i386.update
+i386.update:
 	make generic.update      arch=i386
 i386.clean:
 	make generic.clean       arch=i386
@@ -84,10 +88,11 @@ i386.clean:
 x86_64:
 	make generic.prepare     arch=x86_64
 	make generic.config.auto arch=x86_64
-	make generic.update      arch=x86_64
+	make x86_64.update
 x86_64.config:
 	make generic.prepare     arch=x86_64
-	make generic.config.menu arch=x86_64
+	make x86_64.update
+x86_64.update:
 	make generic.update      arch=x86_64
 x86_64.clean:
 	make generic.clean       arch=x86_64
