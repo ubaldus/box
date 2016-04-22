@@ -11,6 +11,11 @@ ejaExecute('%s/busybox telnetd -l %s/ejaBox.sh -p 35223',eja.pathBin,eja.pathBin
 
 -- ejaWebTelnet
 
+eja.pathBin=eja.path..'/usr/bin/'
+eja.pathEtc=eja.path..'/etc/eja/'
+eja.pathLib=eja.path..'/usr/lib/eja/'
+eja.pathVar=eja.path..'/var/eja/'
+
 dofile(eja.pathLib..'ejaSocketProxy.lua')
 
 local sessionCount=5
