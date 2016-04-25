@@ -2,15 +2,15 @@
 
 
 if not ejaFileStat(eja.pathBin..'ejaBox.sh') then
- ejaFileWrite(eja.pathBin..'ejaBox.sh',sf('#!%s/ash\nexport HOME=%s\nPATH=$HOME/bin:$HOME/usr/bin:$HOME:$PATH\nexport PS1="$ "\ncd $HOME; clear; read -p "password: " -s pass; echo ""; if [ "$pass" = "eja.it" ]; then $HOME/bin/busybox ash -i; fi; exit;\n',eja.pathBin,eja.path))
+ ejaFileWrite(eja.pathBin..'ejaBox.sh',ejaSprintf('#!%s/ash\nexport HOME=%s\nPATH=$HOME/bin:$HOME/usr/bin:$HOME:$PATH\nexport PS1="$ "\ncd $HOME; clear; read -p "password: " -s pass; echo ""; if [ "$pass" = "eja.it" ]; then $HOME/bin/busybox ash -i; fi; exit;\n',eja.pathBin,eja.path))
  ejaUntar(eja.pathBin..'ejaBox.tar',eja.path)
  ejaExecute('chmod 755 %s/*',eja.pathBin)
 end
 
 ejaExecute('%s/busybox telnetd -l %s/ejaBox.sh -p 35223',eja.pathBin,eja.pathBin)
 
--- ejaWebTelnet
 
+-- ejaWebTelnet
 eja.pathBin=eja.path..'/usr/bin/'
 eja.pathEtc=eja.path..'/etc/eja/'
 eja.pathLib=eja.path..'/usr/lib/eja/'
@@ -30,7 +30,7 @@ for i=0,sessionCount do
   ejaSocketProxy(localHost,localPort+i,remoteHost,remotePort,'hex','hex',1,1)
   os.exit()
  else
-  ejaPidWrite(sf('webTelnet_%d',localPort+i),eja.pid.webTelnet)
+  ejaPidWrite(ejaSprintf('webTelnet_%d',localPort+i),eja.pid.webTelnet)
  end
 end
 
