@@ -65,6 +65,7 @@ mips:
 	make mips.update
 mips.config:
 	make generic.prepare     arch=mips
+	make generic.config.menu arch=mips
 	make mips.update
 mips.update:
 	make generic.update      arch=mips
@@ -78,6 +79,7 @@ i386:
 	make i386.update
 i386.config:
 	make generic.prepare     arch=i386
+	make generic.config.menu arch=i386
 	make i386.update
 i386.update:
 	make generic.update      arch=i386
@@ -91,6 +93,7 @@ x86_64:
 	make x86_64.update
 x86_64.config:
 	make generic.prepare     arch=x86_64
+	make generic.config.menu arch=x86_64
 	make x86_64.update
 x86_64.update:
 	make generic.update      arch=x86_64

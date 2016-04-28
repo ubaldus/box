@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="author" content="ubaldo@eja.it">
+ <link rel="shortcut icon" href="img/favicon.ico"  />
+ <link href="css/jquery-ui.min.css" rel="stylesheet">
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+ <link href="css/sb-admin.css" rel="stylesheet">
+ <link href="css/font-awesome.min.css" rel="stylesheet">
+ <link href="css/eja.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="wrapper">
+
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="navbar-header">
+   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    <span class="sr-only">Menu</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+   </button>
+   <a class="navbar-brand" href="?"><img src="img/logo.png"></a>  
+  </div>
+
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+   <ul id="ejaMenu" class="nav navbar-nav side-nav"></ul>
+   <ul id="ejaTitle" class="nav navbar-nav navbar-right"><li class="navbar-text"></li></ul>
+  </div>
+ </nav>
+
+ <div id="page-wrapper">
+ <form id="ejaForm" role="form" class="form-horizontal"></form>
+ </div>
+ 
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.tablesorter.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/sha256.min.js"></script>
+<script src="js/eja.js"></script>
+<script>$(document).ready(ejaInit());</script>
+</body>
+</html>

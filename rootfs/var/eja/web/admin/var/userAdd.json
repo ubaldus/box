@@ -1,0 +1,138 @@
+{
+  "list": {
+    "cmd": [],
+    "fields": []
+  },
+  "search": {
+    "cmd": [],
+    "fields": []
+  },
+  "fields": {
+    "passwordOld": {
+      "i18n": {
+        "it": {
+          "label": "Vecchio Codice",
+          "opts": {},
+          "help": ""
+        },
+        "en": {
+          "label": "Old Password",
+          "opts": {},
+          "help": ""
+        },
+        "es": {
+          "label": "Contraseña Antigua",
+          "opts": {},
+          "help": ""
+        }
+      },
+      "type": "password"
+    },
+    "passwordCheck": {
+      "i18n": {
+        "it": {
+          "label": "Verifica Codice",
+          "opts": {},
+          "help": ""
+        },
+        "en": {
+          "label": "Repeat Password",
+          "opts": {},
+          "help": ""
+        },
+        "es": {
+          "label": "Nueva Contraseña Comprobada",
+          "opts": {},
+          "help": ""
+        }
+      },
+      "type": "password"
+    },
+    "passwordNew": {
+      "i18n": {
+        "it": {
+          "label": "Nuovo Codice",
+          "opts": {},
+          "help": ""
+        },
+        "en": {
+          "label": "New Password",
+          "opts": {},
+          "help": ""
+        },
+        "es": {
+          "label": "Nueva Contraseña",
+          "opts": {},
+          "help": ""
+        }
+      },
+      "type": "password"
+    },
+    "username": {
+      "i18n": {
+        "it": {
+          "label": "Note Utente",
+          "opts": {},
+          "help": ""
+        },
+        "en": {
+          "label": "Username",
+          "opts": {},
+          "help": ""
+        },
+        "es": {
+          "label": "Usuario",
+          "opts": {},
+          "help": ""
+        }
+      },
+      "type": "text"
+    },
+    "hash": {
+      "i18n": {
+        "en": {
+          "label": "Hash",
+          "opts": {},
+          "help": ""
+        },
+        "es": {
+          "label": "Hash",
+          "opts": {},
+          "help": ""
+        }
+      },
+      "type": "text"
+    },
+    "power": {
+      "i18n": {
+        "it": {
+          "label": "Livello",
+          "opts": {},
+          "help": ""
+        },
+        "en": {
+          "label": "Power",
+          "opts": {},
+          "help": ""
+        },
+        "es": {
+          "label": "Nivel Usuario",
+          "opts": {},
+          "help": ""
+        }
+      },
+      "type": "number"
+    }
+  },
+  "edit": {
+    "cmd": [
+      "apply"
+    ],
+    "fields": [
+      "username",
+      "passwordNew",
+      "passwordCheck",
+      "power"
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+-- Copyright (C) 2007-2016 by Ubaldo Porcheddu <ubaldo@eja.it>
+
+
+web=...
+web.headerOut['Content-Type']='application/json'
+web.headerOut['Access-Control-Allow-Origin']='*'
+
+local a={}
+local path=eja.pathEtc
+local newId = function (module)
+ local last=-1
+ for k,v in next,ejaDirTable(path) do
+  local id=v:match('^eja.'..module..'.([0-9]+)$') or v:match('^eja.'..module..'$')
+  if id and ejaNumber(id) > ejaNumber(last) then last=id end
+ end
+ return ejaNumber(last)+1
+end
+
+if web.postFile and web.postFile ~= '' then
+ a=ejaJsonFileRead(web.postFile) or {}
+ a.result=0
+ a.id=ejaNumber(a.id)
+ local pathModule=path..'eja.'..a.module..'.'..a.id
+
+ if a.id == 0 and not ejaFileStat(pathModule) then 
+  pathModule=path..'eja.'..a.module
+ end
+
+ if a.action == 'login' then
+  if web.auth <= 0 then
+   a.result=-10
+  else
+   a.result=10
+  end
+ end
+
+ if web.auth > 2 then
+  if a.action == 'edit' then
+   if a.id then
+    a.data=ejaJsonFileRead(pathModule)
+   else
+    a.result=-10
+   end
+  end
+
+  if a.action == "save" then
+   if ejaJsonFileWrite(pathModule,a.data) then
+    a.data=ejaJsonFileRead(pathModule)
+    a.result=12
+   else
+    a.result=-12
+   end
+  end
+
+  if a.action == "copy" then
+   a.id=newId(a.module)
+   pathModule=path..'eja.'..a.module..'.'..a.id
+   if ejaJsonFileWrite(pathModule,a.data) then
+    a.data=ejaJsonFileRead(pathModule)
+    a.result=11
+   else
+    a.result=-11
+   end
+  end
+
+  if a.action == "delete" then
+   if ejaFileRemove(pathModule) then
+    a.result=13
+   end
+   a.action="search"
+   a.data={}
+  end
+
+  if a.action == 'new' then
+   a.data={}
+   a.id=newId(a.module)
+  end
+
+  if a.action == "apply" then
+   if a.module == 'userAdd' then
+    a.result=-15
+    if a.data.username and a.data.passwordNew and a.data.passwordNew == a.data.passwordCheck and a.data.power then
+     if ejaFileAppend(eja.pathEtc..'eja.web',string.format('%s %d\n',ejaSha256(a.data.username..a.data.passwordNew),ejaNumber(a.data.power))) then
+      a.result=15
+     end
+    end 
+   end 
+   if a.module == 'userMod' then
+    a.result=-15
+    if a.data.username and a.data.passwordNew and a.data.passwordNew == a.data.passwordCheck and a.data.passwordOld then
+     local dataIn=ejaFileRead(eja.pathEtc..'eja.web')
+     if dataIn then
+      local passNew=ejaSha256(a.data.username..a.data.passwordNew)
+      local passOld=ejaSha256(a.data.username..a.data.passwordOld)
+      local dataOut,i=dataIn:gsub(passOld,passNew)
+      if dataOut and ejaNumber(i) > 0 then
+       if ejaFileWrite(eja.pathEtc..'eja.web',dataOut) then
+        a.result=15
+       end
+      end 
+     end 
+    end 
+   end
+  end
+
+ end
+
+ if web.auth > 1 then
+  if a.action == 'search' or a.action == 'list' then
+   a.data={}
+   for k,v in next,ejaDirTable(path) do
+    if v:match('eja.'..a.module..'.') or v:match('eja.'..a.module..'$') then
+     a.data[v:match('%.([0-9]-)$') or 0]=ejaJsonFileRead(path..v)
+    end
+   end
+  end
+ end
+
+ ejaFileRemove(web.postFile)
+end
+
+a.auth=web.auth
+a.ip=web.remoteIp
+a.time=os.time()
+
+web.data=ejaJsonEncode(a) or '{}'
+
+return web

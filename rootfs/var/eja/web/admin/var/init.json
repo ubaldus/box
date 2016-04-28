@@ -1,0 +1,91 @@
+{
+  "list": {
+    "fields": [],
+    "cmd": []
+  },
+  "search": {
+    "fields": [],
+    "cmd": []
+  },
+  "fields": {
+    "logFile": {
+      "type": "text",
+      "i18n": {
+        "en": {
+          "help": "Name of the log file with full path",
+          "opts": {},
+          "label": "Log File"
+        }
+      },
+      "opts": [],
+      "auto": "/tmp/eja.log"
+    },
+    "logLevel": {
+      "type": "select",
+      "i18n": {
+        "en": {
+          "help": "Log Level",
+          "opts": {
+           "0": "off",
+           "1": "error",
+	   "2": "warning",
+	   "3": "info",
+	   "4": "debug",
+	   "5": "trace"
+          },
+          "label": "Log Level"
+        }
+      },
+      "opts": ["0","1","2","3","4","5"],
+      "auto": "3"
+    },
+    "webPort": {
+      "type": "number",
+      "i18n": {
+        "en": {
+          "help": "",
+          "opts": {},
+          "label": "Web Port"
+        }
+      },
+      "opts": [],
+      "auto": "80"
+    },
+    "webCns": {
+      "type": "number",
+      "i18n": {
+        "en": {
+          "help": "Captive Network Assistant timeout",
+          "opts": {},
+          "label": "CNS timeout"
+        }
+      },
+      "opts": [],
+      "auto": "300"
+    },
+    "note": {
+      "type": "textarea",
+      "i18n": {
+        "en": {
+          "help": "",
+          "opts": {},
+          "label": "Note"
+        }
+      },
+      "opts": [],
+      "auto": ""
+    }
+  },
+  "edit": {
+    "fields": [
+      "logLevel",
+      "logFile",
+      "webPort",
+      "webCns",
+      "note"
+    ],
+    "cmd": [
+      "save"
+    ]
+  }
+}

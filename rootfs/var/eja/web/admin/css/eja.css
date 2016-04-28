@@ -1,0 +1,37 @@
+body {
+ background: white;
+}
+
+.btn {
+ margin: 2px
+}
+
+.alert {
+ margin-top: 10px;  
+}
+
+.panel-title {
+ text-align: center;
+}
+
+
+.ejaCommands {
+ text-align: center;
+}
+
+#ejaMenu {
+ display: none; 
+ height: 100%;
+ margin-top: -1px;
+ padding-top: 10px;
+}
+
+
+.navbar-brand img {
+ margin-top: -10px;
+ height: 42px; 
+}
+
+.navbar-right { 
+ margin-right: 0!important;
+}

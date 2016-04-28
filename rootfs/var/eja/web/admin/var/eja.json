@@ -1,0 +1,274 @@
+{
+  "language":"en",
+  "languages":["en","es","it"],
+  "menu":{
+   "list": ["init","user"],
+   "items": {
+     "init": {
+      "url":"",
+      "i18n":{
+        "it":"Init",
+        "en":"Init",
+        "es":"Init"
+      }
+     },
+     "user": {
+      "url":"",
+      "list":["userAdd","userMod"],
+      "i18n":{
+        "it":"Utenti",
+        "en":"Users",
+        "es":"Usuarios"
+      }
+     },
+     "userAdd": {
+      "url":"",
+      "i18n":{
+        "it":"Nuovo",
+        "en":"New",
+        "es":"Nuevo"
+      }
+     },
+     "userMod": {
+      "url":"",
+      "i18n":{
+        "it":"Modifica",
+        "en":"Update",
+        "es":"Actualiza"
+      }
+     }
+    }
+   },
+  "module":{
+    "login":{
+      "list":{
+        "fields":[],
+        "cmd":[]
+      },
+      "fields":{
+        "username":{
+          "opts":[],
+          "type":"text",
+          "auto":"",
+          "i18n":{
+            "it":{
+              "help":"Scrivi il nome utente",
+              "opts":{
+              },
+              "label":"Utente"
+            },
+            "en":{
+              "help":"Enter your username",
+              "opts":{
+              },
+              "label":"Username"
+            },
+            "es":{
+              "help":"Introduzca su usuario",
+              "opts":{
+              },
+              "label":"Usuario"
+            }
+          }
+        },
+        "password":{
+          "opts":[],
+          "type":"password",
+          "auto":"",
+          "i18n":{
+            "it":{
+              "help":"Scrivi il codice di sicurezza",
+              "opts":{
+              },
+              "label":"Codice"
+            },
+            "en":{
+              "help":"Enter your password",
+              "opts":{
+              },
+              "label":"Password"
+            },
+            "es":{
+              "help":"Introduzca su contraseña",
+              "opts":{
+              },
+              "label":"Contraseña"
+            }
+          }
+        }
+      },
+      "edit":{
+        "fields":[],
+        "cmd":[]
+      },
+      "search":{
+        "fields":["username","password"],
+        "cmd":["login"]
+      },
+      "i18n":{
+        "cmd":{
+          "login":{
+            "xx":"module.login.i18n.cmd.login"
+          }
+        },
+        "info":{
+          "10":{
+            "it":"Utente autenticato correttamente",
+            "en":"Login successful",
+            "es":"Usuario y contraseña correctas"
+          },
+          "-2":{
+            "en":"Login error"
+          }
+        },
+        "help":{
+          "it":"Scrivi nome utente e codice di sicurezza",
+          "en":"Enter your username and password",
+          "es":"Introduzca su usuario y contraseña"
+        }
+      }
+    }
+  },
+  "i18n":{
+    "languages": {
+     "it": "Italiano",
+     "en": "English",
+     "es": "Español"
+    },
+    "menu":{
+      "dash":{
+        "xx":"i18n.menu.dash"
+      }
+    },
+    "cmd":{
+      "login":{
+        "xx":"i18n.cmd.login"
+      }
+    },
+    "info":{
+      "-13":{
+        "it":"La scheda non e' stata rimossa",
+        "en":"Card not deleted",
+        "es":"Tarjeta no borrada"
+      },
+      "-15":{
+        "it":"Si e' verificato un errore.",
+        "en":"An error occurred while applying the change.",
+        "es":"Se ha producido un error al aplicar el cambio."
+      },
+      "12":{
+        "it":"Scheda salvata",
+        "en":"Card saved.",
+        "es":"Tarjeta guardada."
+      },
+      "11":{
+        "it":"Scheda copiata",
+        "en":"Card copied.",
+        "es":"Tarjeta copiada."
+      },
+      "15":{
+        "en":"Il servizio e' stato aggiornato regolarmente.",
+        "en":"Changes applied .",
+        "es":"El servicio ha sido actualizado."
+      },
+      "13":{
+        "en":"Scheda rimossa.",
+        "en":"Card deleted.",
+        "es":"Tarjeta guardada."
+      },
+      "-12":{
+        "en":"La scheda non e' stata salvata.",
+        "en":"Card not saved.",
+        "es":"Tarjeta no guardada."
+      },
+      "-11":{
+        "en":"La scheda non e' stata copiata.",
+        "en":"Card not copied.",
+        "es":"Tarjeta no copiada"
+      }
+    }
+  },
+  "cmd":{
+    "list":{
+      "type":"info",
+      "i18n":{
+        "icon":"fa-list",
+        "it":"Lista",
+        "en":"List",
+        "es":"Lista"
+      }
+    },
+    "help":{
+      "type":"info",
+      "i18n":{
+        "icon":"fa-support",
+        "it":"Aiuto",
+        "en":"Help",
+        "es":"Ayuda"
+      }
+    },
+    "save":{
+      "type":"default",
+      "i18n":{
+        "icon":"fa-save",
+        "it":"Salva",
+        "en":"Save",
+        "es":"Guardar"
+      }
+    },
+    "copy":{
+      "type":"warning",
+      "i18n":{
+        "icon":"fa-copy",
+        "it":"Copia",
+        "en":"Copy",
+        "es":"Copiar"
+      }
+    },
+    "new":{
+      "type":"success",
+      "i18n":{
+        "icon":"fa-file",
+        "en":"Nuovo",
+        "en":"New",
+        "es":"Nuevo"
+      }
+    },
+    "delete":{
+      "type":"danger",
+      "i18n":{
+        "icon":"fa-trash-o",
+        "it":"Cancella",
+        "en":"Delete",
+        "es":"Borrar"
+      }
+    },
+    "login":{
+      "type":"primary",
+      "i18n":{
+        "icon":"fa-unlock-alt",
+        "it":"Entra",
+        "en":"Login",
+        "es":"Acceder"
+      }
+    },
+    "edit":{
+      "type":"warning",
+      "i18n":{
+	"icon":"fa-edit",
+        "it":"Modifica",
+        "en":"Edit",
+        "es":"Editar"
+      }
+    },
+    "apply":{
+      "type":"primary",
+      "i18n":{
+        "icon":"fa-gear",
+        "it":"Applica",
+        "en":"Apply",
+        "es":"Aplicar"
+      }
+    }
+  }
+}
