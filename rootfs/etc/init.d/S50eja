@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# Start eja box
+#
+
+start() {
+      printf "Starting ejaBox: "
+      start-stop-daemon -S -q -m -b -p /var/run/eja.pid \
+			-x /usr/bin/eja -- --box-init 
+      [ $? = 0 ] && echo "OK" || echo "FAIL"
+}
+
+stop() {
+	printf "Stopping ejaBox: "
+	start-stop-daemon -K -q -p /var/run/eja.pid \
+			  -x /usr/bin/eja
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+}
+
+case "$1" in
+    start)
+	start
+	;;
+    stop)
+	stop
+	;;
+    restart|reload)
+	stop
+	start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

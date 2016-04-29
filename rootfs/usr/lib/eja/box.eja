@@ -1,6 +1,24 @@
 -- Copyright (C) 2007-2016 by Ubaldo Porcheddu <ubaldo@eja.it>
 
 
+eja.lib.boxInit='ejaBoxInit'
+eja.help.boxInit='ejaBox init'
+
+
+function ejaBoxInit()
+ eja.opt.webPort=80
+ eja.opt.logLevel=3
+ eja.opt.logFile="/tmp/eja.log"
+ local a=ejaJsonFileRead(eja.pathEtc..'eja.init')
+ if jInit then
+  for k,v in next,a do 
+   eja.opt[k]=v 
+  end
+ end 
+ ejaWebStart()
+end
+
+
 function ejaSocketProxy(lHost, lPort, rHost, rPort, inMode, outMode, lTimeout, rTimeout)
  local bSize=8192 
  local lTimeout=lTimeout or 5
