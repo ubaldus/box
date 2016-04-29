@@ -10,7 +10,7 @@ function ejaBoxInit()
  eja.opt.logLevel=3
  eja.opt.logFile="/tmp/eja.log"
  local a=ejaJsonFileRead(eja.pathEtc..'eja.init')
- if jInit then
+ if a then
   for k,v in next,a do 
    eja.opt[k]=v 
   end
