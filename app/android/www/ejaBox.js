@@ -36,7 +36,8 @@ function ejaExecute(cmd) {
 
 function ejaInit() {
  ejaInfo("System init")
- document.getElementById('cmdTelnet').addEventListener('touchstart', ejaTelnet, false); 
+ document.getElementById('cmdBoxInit').addEventListener('touchstart', ejaBoxInit, false); 
+ document.getElementById('cmdAdmin').addEventListener('touchstart', ejaAdmin, false); 
  document.getElementById('cmdConsole').addEventListener('touchstart', ejaConsole, false); 
  document.getElementById('cmdEditor').addEventListener('touchstart', ejaEditor, false); 
  document.getElementById('cmdEditorSave').addEventListener('touchstart', ejaEditorSave, false); 
@@ -61,15 +62,22 @@ function ejaStart() {
 }
 
 
-function ejaConsole() {
- ejaDebug("Console")
- cordova.exec(function(){}, function(){}, "InAppBrowser", "open", ['http://127.0.0.1:35248/', '_blank', 'location=no,hardwareback=yes,zoom=no']);
+function ejaAdmin() {
+ ejaDebug("Admin")
+ cordova.exec(function(){}, function(){}, "InAppBrowser", "open", ['http://127.0.0.1:35248/admin/', '_blank', 'location=no,hardwareback=yes,zoom=no']);
 }
 
 
-function ejaTelnet() {
- document.getElementById("cmdTelnet").style.display="none";
+function ejaConsole() {
+ ejaDebug("Console")
+ cordova.exec(function(){}, function(){}, "InAppBrowser", "open", ['http://127.0.0.1:35248/telnet/', '_blank', 'location=no,hardwareback=yes,zoom=no']);
+}
+
+
+function ejaBoxInit() {
+ document.getElementById("cmdBoxInit").style.display="none";
  document.getElementById("cmdEditor").style.display="none";
+ document.getElementById("cmdAdmin").style.display="inline";
  document.getElementById("cmdConsole").style.display="inline";
  ejaInfo("Starting server")
  networkinterface.getIPAddress(function (ip) { 
@@ -96,7 +104,7 @@ function ejaFileCopy(fileIn, fileOut) {
 }
 
 function ejaEditor() {
- document.getElementById("cmdTelnet").style.display="none";
+ document.getElementById("cmdBoxInit").style.display="none";
  document.getElementById("cmdEditor").style.display="none";
  document.getElementById("cmdEditorSave").style.display="inline";
  document.getElementById("log").style.display="none";
