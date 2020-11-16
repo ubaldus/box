@@ -1,22 +1,19 @@
-/* Copyright (C) 2007-2016 by Ubaldo Porcheddu <ubaldo@eja.it> */
+/* Copyright (C) 2007-2020 by Ubaldo Porcheddu <ubaldo@eja.it> */
 
 var eja={}
 eja.opt={}
-eja.path="/data/user/0/it.eja.box/files/";
-eja.pathBin=eja.path+"/bin/";
+eja.path=null;
 eja.opt.logLevel=4;
-eja.url=''
 eja.editor={}
-
 
 document.addEventListener("deviceready", ejaInit, false);
 
 
-function ejaError(v)	{ if (eja.opt.logLevel > 0) { return ejaLog("E",v); } }
-function ejaWarn(v)	{ if (eja.opt.logLevel > 1) { return ejaLog("W",v); } }
-function ejaInfo(v)	{ if (eja.opt.logLevel > 2) { return ejaLog("I",v); } }
-function ejaDebug(v)	{ if (eja.opt.logLevel > 3) { return ejaLog("D",v); } }
-function ejaTrace(v)	{ if (eja.opt.logLevel > 4) { return ejaLog("T",v); } }
+function ejaError(v)	{ if (eja.opt.logLevel >= 1) { return ejaLog("E",v); } }
+function ejaWarn(v)	{ if (eja.opt.logLevel >= 2) { return ejaLog("W",v); } }
+function ejaInfo(v)	{ if (eja.opt.logLevel >= 3) { return ejaLog("I",v); } }
+function ejaDebug(v)	{ if (eja.opt.logLevel >= 4) { return ejaLog("D",v); } }
+function ejaTrace(v)	{ if (eja.opt.logLevel >= 5) { return ejaLog("T",v); } }
 
 
 function ejaLog(level,message) {
@@ -35,29 +32,41 @@ function ejaExecute(cmd) {
 
 
 function ejaInit() {
- ejaInfo("System init")
+ ejaInfo("System init");
+ eja.path=cordova.file.dataDirectory.replace("file://","");
  document.getElementById('cmdBoxInit').addEventListener('touchstart', ejaBoxInit, false); 
- document.getElementById('cmdAdmin').addEventListener('touchstart', ejaAdmin, false); 
- document.getElementById('cmdConsole').addEventListener('touchstart', ejaConsole, false); 
+ document.getElementById('cmdUpdate').addEventListener('touchstart', ejaUpdate, false); 
  document.getElementById('cmdEditor').addEventListener('touchstart', ejaEditor, false); 
  document.getElementById('cmdEditorSave').addEventListener('touchstart', ejaEditorSave, false); 
  document.getElementById('cmdExit').addEventListener('touchstart', ejaExit, false); 
- window.resolveLocalFileSystemURL(cordova.file.dataDirectory+"/bin", ejaStart, ejaInstall) 
+ window.resolveLocalFileSystemURL(cordova.file.dataDirectory+"/bin", ejaStart, ejaInstall); 
 }
 
 
 function ejaInstall() {
- ejaDebug("Installing server")
- ejaFileCopy(location.href.replace("/index.html", "")+"/"+"bin/eja", cordova.file.dataDirectory+"bin/eja") 
- ejaFileCopy(location.href.replace("/index.html", "")+"/"+"bin/ejaBox.lua", cordova.file.dataDirectory+"bin/ejaBox.lua")
- ejaFileCopy(location.href.replace("/index.html", "")+"/"+"bin/ejaBox.tar", cordova.file.dataDirectory+"bin/ejaBox.tar")
- ejaExecute("chmod 755 "+eja.pathBin+"/eja")
- window.setTimeout(ejaStart,5000)
- ejaDebug("Server installed") 
+ ejaInfo("Installing server");
+ new FileTransfer().download(location.href.replace("/index.html", "")+"/ejaBox.zip", eja.path+"/tmp/ejaBox.zip", function() {
+  window.zip.unzip(eja.path+"/tmp/ejaBox.zip",eja.path+"/tmp/", function() {
+   ejaExecute("/system/bin/sh "+eja.path+"/tmp/zip/ejaBoxInstall.sh");
+   ejaInfo("Server Installed");
+   ejaStart();
+  });
+ })
+}
+
+
+function ejaReset() {
+ document.getElementById("cmdBoxInit").style.display="inline";
+ document.getElementById("cmdEditor").style.display="inline";
+ document.getElementById("cmdUpdate").style.display="inline";
+ document.getElementById("cmdEditorSave").style.display="none";
+ document.getElementById("log").style.display="block";
+ document.getElementById("editor").style.display="none";
 }
 
 
 function ejaStart() {
+ ejaReset();
  ejaInfo('System ready.')
 }
 
@@ -74,17 +83,25 @@ function ejaConsole() {
 }
 
 
+function ejaBoxInitCmd() {
+ setTimeout(function() { 
+  window.ShellExec.exec(eja.path+"/usr/bin/killall -9 eja", function() {
+   ejaExecute(eja.path+"/usr/bin/eja --init");
+  })
+ }, 1000);
+}
+
+
 function ejaBoxInit() {
  document.getElementById("cmdBoxInit").style.display="none";
  document.getElementById("cmdEditor").style.display="none";
- document.getElementById("cmdAdmin").style.display="inline";
- document.getElementById("cmdConsole").style.display="inline";
+ document.getElementById("cmdUpdate").style.display="none";
  ejaInfo("Starting server")
  networkinterface.getIPAddress(function (ip) { 
   ejaInfo('Network access:\n    http://'+ip+':35248\n    telnet://'+ip+':35223'); 
+  ejaBoxInitCmd();
  });
- ejaExecute(eja.pathBin+"/eja "+eja.pathBin+"/ejaBox.lua")                
- ejaInfo("Server ready")
+ ejaInfo("Server ready") 
 }
 
 
@@ -103,11 +120,14 @@ function ejaFileCopy(fileIn, fileOut) {
  );
 }
 
+
 function ejaEditor() {
  document.getElementById("cmdBoxInit").style.display="none";
+ document.getElementById("cmdUpdate").style.display="none";
  document.getElementById("cmdEditor").style.display="none";
  document.getElementById("cmdEditorSave").style.display="inline";
  document.getElementById("log").style.display="none";
+ document.getElementById("editor").style.display="block";
  document.getElementById("editor").style.width=document.body.offsetWidth-20;
  document.getElementById("editor").style.height=document.body.offsetHeight/2;
  eja.editor=ace.edit("editor")
@@ -115,7 +135,7 @@ function ejaEditor() {
  eja.editor.getSession().setUseWrapMode(true);
  eja.editor.getSession().setMode("ace/mode/lua");
 
- window.resolveLocalFileSystemURL(cordova.file.dataDirectory+"bin/ejaBox.lua", 
+ window.resolveLocalFileSystemURL(cordova.file.dataDirectory+"etc/eja/eja.init", 
   function(fd) {
    fd.file( 
     function(fd) {
@@ -135,14 +155,15 @@ function ejaEditor() {
 
 
 function ejaEditorSave() {
- alert("save")
- window.resolveLocalFileSystemURL(cordova.file.dataDirectory+"bin",
+ window.resolveLocalFileSystemURL(cordova.file.dataDirectory+"etc/eja/",
   function(dir) {
-   dir.getFile("ejaBox.lua", { create: true }, 
+   dir.getFile("eja.init", { create: true }, 
     function(file) {
      file.createWriter( 
       function(fileWrite) { 
        fileWrite.write(eja.editor.getSession().getValue())
+       ejaInfo("Init file updated.");
+       ejaReset();
       }
      )
     }
@@ -157,4 +178,17 @@ function ejaEditorSave() {
 
 function ejaExit() {
  navigator.app.exitApp();
+}
+
+
+function ejaUpdate() {
+ document.getElementById("library").style.display="block";
+ var library=document.getElementById("library").value;
+ if (library != "") {
+  document.getElementById("cmdUpdate").style.display="none"; 
+  document.getElementById("library").style.display="none"; 
+  document.getElementById("library").value="";
+  ejaInfo("Installing library: "+library);
+  ejaExecute(eja.path+"/usr/bin/eja --update "+library);
+ }
 }

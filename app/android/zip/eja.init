@@ -1,0 +1,5 @@
+
+eja.opt.webPort=35248;
+eja.opt.webStart=true;
+
+ejaExecute([[%s/usr/sbin/telnetd -p 35223 -F -l %s/bin/ejaBox.sh &]], eja.path, eja.path);

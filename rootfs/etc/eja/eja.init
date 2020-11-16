@@ -1,7 +1,2 @@
-{
- "webCns" : "300",
- "logFile" : "/tmp/eja.log",
- "webPort" : "80",
- "logLevel" : "3",
- "note" :""
-}
+eja.opt.webPort=80;
+eja.opt.web=true;

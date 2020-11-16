@@ -11,19 +11,19 @@
   <div class="container-fluid">
    <h1>ejaBox</h1>
    <div id="cmd" align="center">
-    <input type="button" id="cmdBoxInit"	value="Init"	class="btn btn-success">
+    <input type="button" id="cmdBoxInit"	value="Init"	class="btn btn-success" style="display: none">
     <input type="button" id="cmdAdmin"		value="Admin"	class="btn btn-info" style="display: none">
-    <input type="button" id="cmdConsole"	value="Console"	class="btn btn-info" style="display: none">
-    <input type="button" id="cmdEditor" 	value="Editor" 	class="btn btn-info">
+    <input type="button" id="cmdUpdate"		value="Install"	class="btn btn-warning" style="display: none">
+    <input type="button" id="cmdEditor" 	value="Editor" 	class="btn btn-info" style="display: none">
     <input type="button" id="cmdEditorSave" 	value="Save" 	class="btn btn-success" style="display: none">
     <input type="button" id="cmdExit" 		value="Exit" 	class="btn btn-danger">
    </div>
    <br>
-   <div id="editor" style="position: relative;"></div>          
+   <input type="text" id="library" style="display: none; margin: 10px; width: 100%">
+   <div id="editor" style="position: relative; display: none;"></div>          
    <pre id="log"></pre>
   </div>
   <script type="text/javascript" src="cordova.js"></script>
-  <script type="text/javascript" src="bootstrap.js"></script>
   <script type="text/javascript" src="ace.js"></script>     
   <script type="text/javascript" src="mode-lua.js"></script>     
   <script type="text/javascript" src="worker-lua.js"></script>     
