@@ -105,7 +105,7 @@ android: output
 	tar xf dl/$(ejaBuildRootTar) -C target
 	mv target/buildroot* target/android
 	@cd target/android ; ln -s ../../dl dl ; cat ../../patch/*.patch | patch -p1
-	echo "BR2_arm=y" >> target/android/.config
+	echo "BR2_aarch64=y" >> target/android/.config
 	sed -i 's/+#define\t_PATH_BSHELL\t"\/bin\/sh"/+#define _PATH_BSHELL "\/system\/bin\/sh"/' target/android/package/uclibc/0001-PATH_BSHELL.patch
 	sed -i 's/+#define _PATH_RESCONF        "\/etc\/resolv.conf"/+#define _PATH_RESCONF "\/data\/data\/it.eja.box\/files\/etc\/resolv.conf"/' target/android/package/uclibc/0002-PATH_RESCONF.patch
 	make android.update

@@ -1,2 +1,30 @@
-eja.opt.webPort=80;
 eja.opt.web=true;
+
+if eja.path == "/" then eja.opt.webPort=80; end
+
+if not ejaFileStat(eja.path..'/bin/ejaBox.sh') then
+ ejaFileWrite(eja.path..'/bin/ejaBox.sh',ejaSprintf([[#!%s/bin/ash
+  export HOME=%s
+  PATH=$HOME/bin:$HOME/usr/bin:$HOME:$PATH
+  export PS1="$ "
+  cd $HOME; 
+  clear;
+  echo -n "password: " 
+  read -s pass; 
+  if echo "$pass" | grep "eja.it" > /dev/null; then 
+   clear
+   $HOME/bin/busybox ash -i; 
+  fi; 
+  exit;
+ ]],eja.path,eja.path));
+ ejaExecute('chmod 775 %s/bin/ejaBox.sh', eja.path);
+end
+
+ejaExecute('%s/bin/busybox telnetd -F -l %s/bin/ejaBox.sh -p 35223 &',eja.path,eja.path);
+
+for i=0,5 do
+ if ejaFork() == 0 then
+  ejaWebSocketProxy('0.0.0.0',35200+i,'127.0.0.1',35223,'hex','hex',1,1);
+  os.exit();
+ end
+end

@@ -7,10 +7,12 @@ debug: www/ejaBox.zip
 	cp platforms/android/app/build/outputs/apk/debug/app-debug.apk ../../output/ejaBox.android.debug.apk
 
 clean:
-	rm -rf tar www/ejaBox.zip package-lock.json zip/eja zip/ejaBox.tar
+	rm -rf node_modules platforms plugins package-lock.json zip/ejaBox.tar www/ejaBox.zip 
 	
-www/ejaBox.zip:
-	cp ../../output/eja.android zip/eja
+platforms/android:
+	cordova platforms add android
+	
+www/ejaBox.zip: platforms/android
 	cp ../../output/ejaBox.android.tar zip/ejaBox.tar 
 	zip -r www/ejaBox.zip zip
 	
