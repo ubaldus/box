@@ -1,4 +1,4 @@
-eja.opt.web=true;
+eja.opt.webStart=true;
 
 if eja.path == "/" then eja.opt.webPort=80; end
 
