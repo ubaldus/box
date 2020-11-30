@@ -36,7 +36,7 @@ generic.config.menu:
 	cd target/${arch} && make menuconfig
 	
 generic.update:
-	cd target/${arch} && make PREFIX="/"
+	cd target/${arch} && make EJA_PATH="/"
 	cp target/${arch}/output/images/rootfs.tar output/ejaBox.${arch}.tar
 	cp target/${arch}/output/target/usr/bin/eja output/eja.${arch}
 	
@@ -110,7 +110,7 @@ android: output
 	sed -i 's/+#define _PATH_RESCONF        "\/etc\/resolv.conf"/+#define _PATH_RESCONF "\/data\/data\/it.eja.box\/files\/etc\/resolv.conf"/' target/android/package/uclibc/0002-PATH_RESCONF.patch
 	make android.update
 android.update:
-	cd target/android && yes "" | make config && make PREFIX="/data/data/it.eja.box/files/" _PATH_BSHELL=/system/bin/sh _PATH_RESCONF=/data/data/it.eja.box/files/etc/resolv.conf
+	cd target/android && yes "" | make config && make EJA_PATH="/data/data/it.eja.box/files/" _PATH_BSHELL=/system/bin/sh _PATH_RESCONF=/data/data/it.eja.box/files/etc/resolv.conf
 	cp target/android/output/images/rootfs.tar output/ejaBox.android.tar
 	cp target/android/output/target/usr/bin/eja output/eja.android
 	make android.app
